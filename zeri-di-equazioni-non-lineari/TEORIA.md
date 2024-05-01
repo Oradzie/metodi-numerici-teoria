@@ -11,4 +11,5 @@ In particolare:
     - se f(a(k-1))*f(c(k)) < 0 --> si pone b(k) = c(k) e a(k) = a(k-1)
     - in questo modo l'intervallo iniziale viene via via dimezzato, in particolare dopo k iterazioni si arriva all'intervallo [a(k),b(k)] 
       di ampiezza (b(k) - a(k)) = 1/2^k * (b(0) - a (0))
-- l'errore al passo k è |e(k)| = |x(k) - alfa| <= 1/2 * |b
+- l'errore al passo k è |e(k)| = |x(k) - alfa| <= 1/2 * |b(0) - a(0)|
+
