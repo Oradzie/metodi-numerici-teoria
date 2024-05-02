@@ -15,7 +15,7 @@ In particolare:
 - si ricorda che il metodo di bisezione è un metodo molto lento, servono fino a 4 iterazioni per ottenere una cifra significativa esatta nella
   soluzione approssimata
 - il criterio di arresto del metodo di bisezione si ottiene nel seguente modo:
-  - |b-a/2^(k+1)| <= epsilon (questo permette di verificare qunate iterazioni sono necessarie per raggiungere la precisazione epsilon prefissata)
+  - |b-a/2^(k+1)| <= epsilon (questo permette di verificare quante iterazioni sono necessarie per raggiungere la precisazione epsilon prefissata)
     2^(k+1) >= b-a/epsilon --> k >= log2(b-a/epsilon) - 1
 - il metodo di bisezione ha ordine di convergenza lineare 
 
@@ -40,7 +40,7 @@ METODO DELLA REGULA FALSI:
 METODI DI LINEARIZZAZIONE:
 I metodi di linearizzazione sono metodi che in generale utilizzano la suguente formula:
   -  x(k+1) = x(k) - f(x)/m(k)
-- m(k) gioca un ruolo importante, infatti, a seconda della scelta di m(k) posso distinguere 3 metodi diversi:
+- m(k) gioca un ruolo importante, infatti, a seconda della scelta di m(k), posso distinguere 3 metodi diversi:
   1. metodo delle corde 
   2. metodo delle secanti
   3. metodo di newton 
@@ -48,11 +48,11 @@ I metodi di linearizzazione sono metodi che in generale utilizzano la suguente f
 
   1. METODO DELLE CORDE:
   - utilizza un valore di m costante e =!0 
-  - quindi x(k+1) = [x(k) - f(x(k))]/m
-  - una scelta classica è quella di usare m = [f(b) - f(a)] / b -a 
+  - quindi x(k+1) = x(k) - f(x(k))/m
+  - una scelta classica è quella di usare m = [f(b) - f(a)] / (b - a)
   - sostituendo m nella formula al punto due si otterrà infine che l'iterato successivo si calcolerà nel seguente modo:
     - x(k+1) = x(k) - f(x(k)) * (b - a)/[f(b) - f(a)]
-  - si può notare poi dai grafici delle rette che vengono calcolate ad ogni passo per cercare lo zero che sono tutte parallele fra di loro
+  - si può notare poi dai grafici delle rette che vengono calcolate ad ogni passo per cercare lo zero, che sono tutte parallele fra di loro
    (m = costante), quindi esse avranno tutte lo stesso coefficiente angolare
 
   2. METODO DELLE SECANTI:
