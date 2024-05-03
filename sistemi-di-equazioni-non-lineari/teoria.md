@@ -15,7 +15,7 @@ METODO DI NEWTON-RAPHSON:
     - dato x(0) appartenente ad Rn ed F, per ogni iterazione k:
       1. valutare J(x(k-1))
       2. risolvere il sistema lineare J(x(k-1))*s(k-1) = - F(x(k-1))
-      3. porre x(k) = x(k-1) * s(k-1)
+      3. porre x(k) = x(k-1) + s(k-1)
 - si ricorda che la Jacobiana deve avere determinante diverso da zero, altrimenti non è possibile determinare s
 - tale metodo è a convergenza locale e ordine di convergenza quadratico
 - si può dire che s(k) mi dice la direzione successiva verso cui muovermi per giungere a convergenza
