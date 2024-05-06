@@ -95,3 +95,75 @@ Sono quindi basati nella fattorizzazione di A nel prodotto di due matrici B e C:
         • equazione 1: Qy = b
         • equazione 2: Rx = y
 
+STABILITA' DI UN ALGORITMO DI FATTORIZZAZIONE:
+• Considero A = B*C e studiamo il fatto che questa fattorizzazione venga eseguita operando con i numeri finiti:
+    • A + A(perturbato) = (B + B(perturbato))*(C + C(perturbato))
+• Questa relazione mette in evidenza che la perturbazoine su A, non solo dipende dalle piccole perturbazioni su B e C, ma è tanto più grande quanro più grandi sono gli elementi dei fatti B e C.
+• Quindi la stabilità si definisce in termini degli elementi di B e di C.
+• Data una matrice A i cui elementi sono tutti minori od uguali ad 1, si dice che un algoritmo di fattorizzazione che produce una fattorizzazione BC della
+  matrice A è numericamente stabile in senso forte, se esistono delle costanti positive a e b, indipendenti dall'ordine e dagli elementi di A t.c:
+    • |b(ij)| <= a e |c(ij)| <= b
+    • se le costanti a e b dipendono dall'ordine di A si dice che la fattorizzazione è stabile in senso debole.
+
+STABILITA' DELL'ALGORITMO DI FATTORIZZAZIONE DI GAUSS, A = LU:
+• nel caso in cui si utilizzi la tecnica di pivotaggio a perno massimo per colonne, che nasce da un'opportuna scelta della matrice P , si ha:
+    • |l(ij)| <= 1
+    • |u(ij)| <= 2^(n-1)*max|a(ij)|
+• l'algoritmo di fattorizzazione di Gauss è stabile in senso debole perchè la costante che maggiora gli elementi di L non dipende dall'ordine della matrice,
+  mentre ciò non accade per la costante che maggiora gli elementi di U, che dipende in maniera esponenziale dall'ordine della matrice.
+
+METODI ITERATIVI PER LA SOLUZIONE DI SISTEMI LINEARI:
+• i metodi iterativi raggiungono la soluzione esatta come limite di un procedimenti iterativo
+• si basano sulla decomposizione della matrice A e presentano una complessità di O(kn^2) dove k = numero di iterazioni
+• questi metodi risultano PARTICOLARMENTE CONVENIENTI quando la matrice A del sistema è di grandi dimensioni e SPARSA (il numero di elementi non nulli è di molto infeririore al numero degli elementi nulli)
+• con le matrici sparse, applicando i metodi diretti, si potrebbe verificare il fenomeno del fill-in --> impedisce di avere dei metodi di memorizzazione che tengono conto degli elementi non nulli... questo non avviene applicando i metodi iterativi, in quanto essi si limitano ad utilizzare elementi non nulli della matrice senza toccare gli elementi nulli
+
+IDEA DEI METODI ITERATIVI:
+1. partire da un vettore x(0) iniziale arbitrario (stima iniziale della soluzione del sistema)
+2. costruire una successione di iterati x(k) medinate il seguente procedimento iterativo:
+    x(k) = Tx(k-1) + q  dove T = M^-1 * N è detta MATRICE DI ITERAZIONE DEL METODO ITERATIVO e q = M^-1 * b
+3. A viene fattorizzata in M - N (splitting), dove M è facilmente invertibile e ha det!=0
+
+– i metodi iterativi si suddividono in due principali algoritmi di risoluzione:
+    • in entrambi si considera la matrice A del sistema come somma di 3 matrici A = D + E + F:
+        • D ha sulla diagonale gli elementi sulla diagonale di A 
+        • E è una matrice triangolare inferiore dove dalla diagonale in su sono tutti 0 e sotto la diagonale ci sono gli el. corrispondenti della matrice A
+        • F è una matrice triangolare superiore dove dalla diagonale in giù sono tutti 0 e dalla diagonale in sù ci sono tutti gli el. corrispondenti di A
+    1. METODO DI JACOBI:
+    • M = D e N = -(E + F)
+    • x(k) si ottiene seguendo la formula:
+        • x(k) = -D^-1(E + F)*x(k-1) + D^-1 * b
+        • si può notare facilmente che E+F rappresenta la matrice A senza elementi sulla diagonale, e da li posso trovare la formula per calcolare l'elemento j-esimo del vettore degli iterati (guardare formula nelle slide)
+    • NB: l'algoritmo di Jacobi, per calcolare le nuove componenti del vettore degli iterati, utilizza solo gli elementi calcolati al passo k-1, senza
+      sfruttare quelli che sta calcolando al passo k
+    
+    2. METODO DI GAUSS-SEIDEL:
+    • M = (D + E) e N = -F
+    • (guardare formula sulle slide per trovare la componente j-esima del vettore degli iterati)
+    • a differenza del metodo di Jacobi, tale algoritmo  sfrutta le i-1 soluzioni già calcolate in precedenza
+
+    OSSERVAZIONE: 
+    • l'algoritmo di Jacobi è definito se gli elementi diagonali  di A sono diversi da 0, in caso contrario, si possono riordinare le equazioni e le incognite del sistema, in modo da rendere il metodo definito.
+
+TEOREMA: CONDIZIONE NECESSARIA E SUFFICIENTE ALLA CONVERGENZA:
+• sia A = M - N  una matrice di ordine n, con det(A) != 0, e T = M^-1 * N la matrice di iterazione del procedimento iterativo.
+• condizione necessaria e sufficiente per la convergenza del metodo iterativo, comunque si scelga il valore iniziale x(0), al vettore soluzione x
+  del sistema Ax=b, è che:
+    – ∂(T) < 1  dove ∂ è il raggio spettrale (autovalore di modulo massimo) della matrice di iterazione T
+
+CONDIZIONI SUFFICIENTI PER LA CONVERGENZA:
+-TEOREMA 1:
+• se per una qualunque norma, risulta che ||T|| < 1, allora il procedimento iterativo:
+    •  x(k) = Tx(k-1) + q   è convergente per ogni x(0)
+-TEOREMA 2:
+• se la matrice A è strettamente dominante, cioè: per ogni riga della matrice, il valore dell'elemento diagonale è maggiore della somma dei valori assoluti 
+  degli altri elementi nella stessa riga --> allora sia il metodo di Jacobi che quello di Gauss-Seidel convergono
+NB: più è piccolo ∂, + srà veloce il metodo a convergereù
+-TEOREMA 3:
+• se la matrice A è simmetrica e definita positiva --> allora il metodo di Gauss-Seidel è convergente
+
+ACCELERAZIONI DI UN METODO ITERATIVO:
+- è possibile accelerare la convergenza di un metodo iterativo? sì, tramite una famiglia di metodi nota come motodi di rilassamento.
+• L'idea di base di questi metodi è la seguente:
+    • poichè la velocità di convergenza di un metodo iterativo dipende dal raggio spettrale della matrice di iterazione associata al metodo, un modo per cercare di accelerare la convergenza è quello di far dipendere la matrice di iterazione da un parametro, detto parametro di rilassamento (omega), e di scegliere tale parametro in modo tale che la matrice abbia minimo raggio spettrale.
+    
