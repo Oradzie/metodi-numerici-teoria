@@ -13,3 +13,5 @@ build/
 *.DS_Store
 deleteme/
 
+# python cache
+__pycache__
