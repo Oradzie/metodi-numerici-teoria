@@ -55,7 +55,7 @@ it_max = 500
 toll = 1e-8
 
 #testo la funzione
-x,it,er_vet = jacobi(A,b,x0,it_max,toll)
+x,it,er_vet = jacobi(A,b,x0,toll,it_max)
 print(x,it,er_vet)
 
 print(np.linalg.solve(A,b))
