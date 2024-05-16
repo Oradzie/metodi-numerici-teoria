@@ -51,7 +51,7 @@ def conjugate_gradient(A, b, x0, itmax, toll):
         # Calcolo il numeratore per trovare il nuovo alpha (<r^(k), r^(k)>), dove p = -R^(k)
         num = -(r.T@p)
         
-        # Calcolo il nuovo alpha 
+        # Calcolo il nuovo alpha (distanza alla quale fermarmi durante la discesa in direzione p)
         alpha = num/(p.T@Ap)
 
         # Calcolo del nuovo iterato
@@ -86,12 +86,6 @@ A=A.astype(float)
 b=dati["b"]
 
 b=b.astype(float)
-
-# Matrice che rappresenta il sistema di equazioni
-# A = np.array([[8,4],[4,3]])
-
-# Vettore dei termini noti
-# b = np.array([[8],[10]])
 
 # Vettore delle soluzioni di partenza
 x0 = np.zeros_like(b)
