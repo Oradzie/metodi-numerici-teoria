@@ -6,15 +6,19 @@ import matplotlib.pyplot as plt
 
 import SolveTriangular
 
-dati = loadmat('test_06_05_2024.mat')
+# dati = loadmat('test_06_05_2024.mat')
 
-A=dati["A"] 
+# A=dati["A"] 
 
-A=A.astype(float)
+# A=A.astype(float)
 
-b=dati["b"]
+# b=dati["b"]
 
-b=b.astype(float)
+# b=b.astype(float)
+
+A = np.array([[1, 1], [1, 2], [1, 3], [1, 4], [1, 5]])
+b = np.sum(A, axis=1)
+
 n,m = A.shape
 print(A.shape,A)
 nz = np.count_nonzero(A)/(n*m)
