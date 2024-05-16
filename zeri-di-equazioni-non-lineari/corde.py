@@ -25,7 +25,7 @@ def corde(fname, m, x0, tolx, tolf, maxit):
     # Calcolo l'operando della formula per il calcolo del nuovo iterato ((1/m)*f(x0))
     d = fx0/m
     
-    # Calcolo del nuobo iterato (x0-(1/m)*f(x0))
+    # Calcolo del nuovo iterato (x0-(1/m)*f(x0))
     x1 = x0-d
     
     # Calcolo il valore della funzione nel nuovo iterato
