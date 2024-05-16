@@ -27,15 +27,33 @@ plt.spy(A) #bianco dove gli elementi sono nulli, un puntino nero dove ci sono el
 #cholesky è piu veloce di Gauss
 
 
-flag = A == A.T
-if np.all(flag) == 0:
-    print("Matrice non simmettrica")
+m, n = A.shape
+print(f"La matrice A é composta da {m} righe e {n} colonne")
+if m == n:
+    print("É una matrice quadrata")
 else:
-    print("Matrice è simmetrica")
-    autovalori = np.linalg.eigvals(A)
-    flag_dp = np.all(autovalori > 0)
-    print("Matrice definita positiva", flag_dp)
-#sto confrontando ogni elemento di A con a trasporto
+    print("É una matrice rettangolare")
+    
+if np.count_nonzero(A)*100/(m*n) < 33:
+    print("La matrice é sparsa")
+else:
+    print("La matrice non é sparsa")
+    
+print(f"Condizionamento della matrice A {np.linalg.cond(A):.2f}")
+
+print(f"Il rango della matrice é: {np.linalg.matrix_rank(A)}")
+
+print(f"Il determinante della matrice é: {np.linalg.det(A)}")
+
+if np.linalg.det(A) > 0 and A[0][0] > 0:
+    print("La matrice é definita positiva")
+else:
+    print("La matrice non é definita positiva") 
+
+if np.array_equal(A, A.T):
+    print("La matrice é simmetrica")
+else:
+    print("La matrice non é simmetrica")
     
 
 #NB: in aggiunta utilizzare la mappa concettuale fornita dalla prof per capire quale metoedo è meglio utilizzare
