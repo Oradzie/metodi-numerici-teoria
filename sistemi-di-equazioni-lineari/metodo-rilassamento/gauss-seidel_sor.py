@@ -1,4 +1,9 @@
+from scipy.io import loadmat
+
 import numpy as np
+
+import matplotlib.pyplot as plt
+
 import SolveTriangular
 
 def gauss_seidel_sor(A,b,x0,toll,it_max,omega):
@@ -32,6 +37,19 @@ def gauss_seidel_sor(A,b,x0,toll,it_max,omega):
     return xnew,it,er_vet
 
 #la matrice era stata fornita dalla prof all'esame (guarda in scelta metodo come caricarla)
+dati = loadmat('test_06_05_2024.mat')
+
+A=dati["A"] 
+
+A=A.astype(float)
+
+b=dati["b"]
+
+b=b.astype(float)
+n,m = A.shape
+print(A.shape,A)
+nz = np.count_nonzero(A)/(n*m)
+perc_nz = nz * 100
 
 #costruisco l'iterato iniziale
 x0 = np.zeros_like(b)
@@ -46,4 +64,4 @@ toll = 1e-8
 #nota bene: la prof ha detto che omega va scelto fra 1.1 e 1.5, puoi accorgerti facilmente che gauss_seidel_sor è più veloce di gauss seidel
 omega = 1.2
 x_sor,it_sor,er_vet_sor = gauss_seidel_sor(A,b,x0,toll,it_max,omega)
-print(it_sor)
+print("il numero di iterazioni è:",it_sor)
