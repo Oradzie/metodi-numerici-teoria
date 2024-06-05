@@ -29,9 +29,13 @@ def eqnorm(A, b):
 # La metrice che rappresenta il sistema lineare sovradeterminato
 A = np.array([[1, 1], [1, 2], [1, 3], [1, 4], [1, 5]])
 
+# Controllo del condizionamento e del rango della matrice A
+print(f"Condizionamento della matrice A: {np.linalg.cond(A)}")
+print(f"Rango della matrice A: {np.linalg.matrix_rank(A)}")
+
 # Il vettore dei termini noti calcolato in modo tale che il vettore delle soluzioni siano tutti elementi uguali a 1
 b = np.sum(A, axis=1)
 
 # Calcolo della soluzione del sistema lineare sovradeterminato tramite equazioni normali
 a = eqnorm(A, b)
-print(f"Solutzione: {a}")
+print(f"Soluzione: {a}")
